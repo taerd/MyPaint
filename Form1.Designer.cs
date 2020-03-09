@@ -369,7 +369,7 @@ namespace NewPaint
             this.toolStripTextBoxAbout});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(597, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(597, 30);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "Фаил";
             // 
@@ -381,7 +381,7 @@ namespace NewPaint
             this.toolStripComboBoxClear});
             this.toolStripTextBox1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripTextBox1.Image")));
             this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(79, 24);
+            this.toolStripTextBox1.Size = new System.Drawing.Size(79, 26);
             this.toolStripTextBox1.Text = "Фаил";
             // 
             // toolStripTextBoxOpen
@@ -424,7 +424,7 @@ namespace NewPaint
             // toolStripTextBoxAbout
             // 
             this.toolStripTextBoxAbout.Name = "toolStripTextBoxAbout";
-            this.toolStripTextBoxAbout.Size = new System.Drawing.Size(118, 24);
+            this.toolStripTextBoxAbout.Size = new System.Drawing.Size(118, 26);
             this.toolStripTextBoxAbout.Text = "О программе";
             this.toolStripTextBoxAbout.Click += new System.EventHandler(this.toolStripTextBoxAbout_Click);
             // 

@@ -225,9 +225,6 @@ namespace NewPaint
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 img = img2;
                 bg = bgc.Allocate(g, new Rectangle(0, 0, panelWidth, panelHeight));
-                //ниже потом убрать
-                label1.Text = "X:" + panelWidth;
-                label2.Text = "Y:" + panelHeight;
             }
         }
         private void panelMain_MouseDown(object sender, MouseEventArgs e)
@@ -253,6 +250,9 @@ namespace NewPaint
         {
             if (img == null) return;
             endPoint = new Point(e.X, e.Y);
+            //ниже потом убрать можно
+            label1.Text = "X:" + endPoint.X;
+            label2.Text = "Y:" + endPoint.Y;
             if (paint)
             {
                 if(pickedFigure == Figure.Line)
