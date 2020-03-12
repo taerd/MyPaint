@@ -74,8 +74,26 @@ namespace NewPaint
         private void toolStripMenuItemOpen2_Click(object sender, EventArgs e)//открываем по размеру картинки
         {
             var res = openFileDialog1.ShowDialog();
-            if (res == DialogResult.OK)
-            {
+            if (res == DialogResult.OK) 
+            { 
+
+                img2 = new Bitmap(Image.FromFile(openFileDialog1.FileName));
+                if(img2.Width >=panelMain.MinimumSize.Width && img2.Height >= panelMain.MinimumSize.Height && img2.Width <= 1455 && img2.Height <= 741)
+                {
+                    this.Width = img2.Width;
+                    this.Height = img2.Height;
+
+                    gimg = Graphics.FromImage(img2);
+                    
+                    g = panelMain.CreateGraphics();
+
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    gimg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+                    gimg.DrawImage(img2, 0, 0);
+                    g.DrawImage(img2, 0, 0);
+                    img = img2;
+                }
                 //устанавливаем порог сверху и снизу
                 //изменяем размеры формы(панели) под размеры картинки и вставляем через вторую картинку
             }
