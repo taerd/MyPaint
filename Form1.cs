@@ -34,7 +34,7 @@ namespace NewPaint
         private int panelWidth { get; set; }
         private int panelHeight { get; set; }
 
-        bool created = false, paint = false;
+        bool created = false, paint = false, opened = false;
 
         private enum Figure { Line, Rectangle, Ellipse, Star, Arrow }
         private Figure pickedFigure;
@@ -60,16 +60,28 @@ namespace NewPaint
             {
                 img2 = new Bitmap(Image.FromFile(openFileDialog1.FileName));
 
+                g.Clear(Color.White);
+                gimg.Clear(Color.White);
+
                 gimg = Graphics.FromImage(img2);
                 g = panelMain.CreateGraphics();
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                 gimg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
+                /*
+                bg = bgc.Allocate(g, new Rectangle(0, 0,img2.Width, img2.Height));
+                var bgg = bg.Graphics;
+                bgg.Clear(Color.White);
+                bg.Render();
+                */
+
                 gimg.DrawImage(img2, 0, 0);
                 g.DrawImage(img2, 0, 0);
                 img = img2;
+                panelMain_Resize(sender, e);
             }
+            opened = true;
         }
         private void toolStripMenuItemOpen2_Click(object sender, EventArgs e)//открываем по размеру картинки
         {
@@ -80,19 +92,25 @@ namespace NewPaint
                 img2 = new Bitmap(Image.FromFile(openFileDialog1.FileName));
                 if(img2.Width >=panelMain.MinimumSize.Width && img2.Height >= panelMain.MinimumSize.Height && img2.Width <= 1455 && img2.Height <= 741)
                 {
+                    
                     this.Width = img2.Width;
                     this.Height = img2.Height;
 
-                    gimg = Graphics.FromImage(img2);
+                    panelWidth = img2.Width;
+                    panelHeight = img2.Height;
+
+                    Image img3 = new Bitmap(img2, panelWidth, panelHeight);
+
+                    gimg = Graphics.FromImage(img3);
                     
                     g = panelMain.CreateGraphics();
 
                     g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                     gimg.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                    gimg.DrawImage(img2, 0, 0);
-                    g.DrawImage(img2, 0, 0);
-                    img = img2;
+                    gimg.DrawImage(img3, 0, 0);
+                    g.DrawImage(img3, 0, 0);
+                    img = img3;
                 }
                 //устанавливаем порог сверху и снизу
                 //изменяем размеры формы(панели) под размеры картинки и вставляем через вторую картинку
@@ -298,6 +316,11 @@ namespace NewPaint
         }
         private void panelMain_MouseUp(object sender, MouseEventArgs e)
         {
+            if (opened)
+            {
+                opened = false;
+                return;
+            }
             paint = false;
             DrawOrFillFigure(pickedFigure, startPoint, endPoint, gimg, !(panelCol2.BackColor == SystemColors.Control));
             g.DrawImage(img, 0, 0);
